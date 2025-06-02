@@ -20,6 +20,7 @@
             <th>Endereço</th>
             <th>Telefone</th>
             <th>RA</th>
+            <th>Curso</th>
             <th colspan="2">Ações</th>
         </tr>
         <!-- Listar alunos encontradops -->
@@ -29,6 +30,7 @@
             <td th:text="${aluno.endAluno}">*</td>
             <td th:text="${aluno.telAluno}">*</td>
             <td th:text="${aluno.raAluno}">*</td>
+            <td th:text="${aluno.curso.nomeCurso}">*</td>
             <td>
                 <a th:href="@{/alunos/editar/{id}(id=${aluno.idAluno})}">Editar</a>
                 <a th:href="@{/alunos/excluir/{id}(id=${aluno.idAluno})}">Excluir</a>

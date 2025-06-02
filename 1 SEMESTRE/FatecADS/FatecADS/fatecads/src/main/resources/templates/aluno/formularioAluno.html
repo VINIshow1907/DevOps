@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Alunos</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Cadastrar Alunos</h1>
@@ -27,7 +28,14 @@
         <label for="raAluno">RA:</label>
         <input type="text" name="raAluno" th:field="*{raAluno}">
         <br />
-
+        <label for="idCurso">
+            <select th:field="*{curso}">
+                <option value="" disabled selected>Selecione o curso:</option>
+                <option th:each="curso : ${cursos}" th:text="${curso.nomeCurso}"
+                    th:value="${curso.idCurso}">
+                </option>
+            </select>
+        </label>
         <input type="submit" name="cadastrar" value="Cadastrar"> 
         
     </form>
