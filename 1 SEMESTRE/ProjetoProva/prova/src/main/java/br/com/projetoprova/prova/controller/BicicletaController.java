@@ -1,56 +1,56 @@
-package br.com.projetoprova.projetoprova.controller;
+package br.com.projetoprova.prova.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import br.com.bicicleta.bicicleta.entity.Bicicleta;
-import br.com.bicicleta.bicicleta.entity.TipoBicicleta;
-import br.com.bicicleta.bicicleta.service.BicicletaService;
-import br.com.bicicleta.bicicleta.service.TipoBicicletaService;
+
+import br.com.projetoprova.prova.entity.Bicicleta;
+import br.com.projetoprova.prova.service.BicicletaService;
+import br.com.projetoprova.prova.service.TipoBicicletaService;
 
 @Controller
 @RequestMapping("/bicicleta")
 public class BicicletaController {
+
     @Autowired
     private BicicletaService bicicletaService;
+
     @Autowired
-    private EspecialidadeService especialidadeService;
+    private TipoBicicletaService tipoBicicletaService;
 
     @GetMapping("/listar")
     public String listar(Model model) {
-        List<Bicicleta> bibicletas = bicicletaService.findAll();
+        List<Bicicleta> bicicletas = bicicletaService.findAll();
         model.addAttribute("bicicletas", bicicletas);
-        return "dentista/listabicicletas";
+        return "bicicleta/listaBicicleta";
     }
 
     @GetMapping("/criar")
     public String criarForm(Model model) {
         model.addAttribute("bicicleta", new Bicicleta());
-        List<Especialidade> especialidades = especialidadeService.findAll();
-        model.addAttribute("especialidades", especialidades);
+        model.addAttribute("tiposBicicleta", tipoBicicletaService.findAll());
         return "bicicleta/formularioBicicleta";
     }
 
     @PostMapping("/salvar")
     public String salvar(@ModelAttribute Bicicleta bicicleta) {
         bicicletaService.save(bicicleta);
-        return "redirect:/bicicletas/listar";
+        return "redirect:/bicicleta/listar";
     }
 
     @GetMapping("/excluir/{id}")
     public String excluir(@PathVariable Integer id) {
         bicicletaService.deleteById(id);
-        return "redirect:/bicicletas/listar";
+        return "redirect:/bicicleta/listar";
     }
 
     @GetMapping("/editar/{id}")
     public String editarForm(@PathVariable Integer id, Model model) {
         Bicicleta bicicleta = bicicletaService.findById(id);
-        List<Especialidade> especialidades = especialidadeService.findAll();
-        model.addAttribute("especialidades", especialidades);
         model.addAttribute("bicicleta", bicicleta);
+        model.addAttribute("tiposBicicleta", tipoBicicletaService.findAll());
         return "bicicleta/formularioBicicleta";
     }
-} 
+}
