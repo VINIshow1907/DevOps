@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Tipo da Bicicleta</title>
+    <link rel="stylesheet" href="/css/bicicleta.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+      .header {
+        box-shadow: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+            
+          <h1>Sistema de bicicletaria</h1>
+        </div>
+      </div>
+      
+      <div th:if="${error}" class="error-message" th:text="${error}"></div>
+      
+      <form th:action="@{/tipoBicicletas/salvar}" method="POST" th:object="${tipoBicicleta}">
+        <h1>
+          <span th:text="${tipoBicicleta.id == null ? 'Novo tipo de bicicleta' : 'Editar tipo de bicicleta'}"></span>
+        </h1>
+        
+        <input type="hidden" name="id" th:field="*{id}" readonly />
+        
+        <div class="form-group">
+          <label for="tipoBicicleta">
+            <i class="fas fa-tag"></i>
+            Nome do tipo da bicicleta
+          </label>
+          <input type="text" name="tipoBicicleta" th:field="*{tipoBicicleta}" required 
+                 th:class="${#fields.hasErrors('tipoBicicleta')} ? 'error'"
+                 placeholder="Digite o nome do tipo da bicicleta" />
+          <span class="error" th:if="${#fields.hasErrors('tipoBicicleta')}" 
+                th:errors="*{tipoBicicleta}"></span>
+        </div>
+        
+        <div class="form-actions">
+  <button type="submit" class="btn-salvar">Salvar</button>
+  <a th:href="@{/tipoBicicletas/listar}" class="btn-cancelar">Cancelar</a>
+</div>
+
+      </form>
+    </div>
+  </body>
+</html>

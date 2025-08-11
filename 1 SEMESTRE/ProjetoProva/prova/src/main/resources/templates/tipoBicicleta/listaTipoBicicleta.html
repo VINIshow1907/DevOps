@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de Especialidades</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #ffffff;
+      padding: 30px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo img {
+      width: 40px;
+      height: auto;
+    }
+
+    .logo h1 {
+      font-size: 1.8em;
+      color: #222;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background-color: #ffffff;
+      color: #079db1;
+    }
+
+    .btn:hover {
+      background-color: #ffffff;
+      color: #079db1;
+    }
+
+    .icon-verde {
+      margin-right: 8px;
+      color: #079db1;
+    }
+
+    .icon-salmao {
+      color: #ffa07a;
+    }
+
+    .icon-verde-escuro {
+      color: #079db1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: #079db1;
+      color: #ffffff;
+    }
+
+    th, td {
+      padding: 14px 18px;
+      text-align: left;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-secondary {
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffffff;
+      color: #079db1;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: #ffffff;
+      color: #079db1;
+    }
+
+    .btn-danger {
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffffff;
+      color: #ffa07a;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .btn-danger:hover {
+      background-color: #ffffff;
+      color: #ff7f50;
+    }
+
+    .error-message {
+      background-color: #ffe5e5;
+      color: #c00;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .success-message {
+      background-color: #e5ffe5;
+      color: #079db1;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        
+        <h1>Sistema de bicicletaria</h1>
+      </div>
+      <a th:href="@{/tipoBicicletas/criar}" class="btn">
+        <i class="fas fa-plus icon-verde"></i> <span>Novo Tipo de Bicicleta</span>
+      </a>
+    </div>
+
+    <div th:if="${param.error}" class="error-message" th:text="${param.error}"></div>
+    <div th:if="${error}" class="error-message" th:text="${error}"></div>
+    <div th:if="${param.success}" class="success-message" th:text="${param.success}"></div>
+    <div th:if="${success}" class="success-message" th:text="${success}"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome do tipo da bicicleta</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="tipoBicicleta : ${tipoBicicletas}">
+          <td th:text="${tipoBicicleta.id}"></td>
+          <td th:text="${tipoBicicleta.tipoBicicleta}"></td>
+          <td>
+            <div class="action-buttons">
+              <a th:href="@{/tipobicicleta/editar/{id}(id=${tipoBicicleta.id})}" class="btn-secondary" title="Editar">
+                <i class="fas fa-edit icon-verde-escuro"></i>
+              </a>
+              <a th:href="@{/tipobicicleta/excluir/{id}(id=${tipoBicicleta.id})}" class="btn-danger" title="Excluir"
+                 onclick="return confirm('Tem certeza que deseja excluir esta tipoBicicleta?')">
+                <i class="fas fa-trash icon-salmao"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

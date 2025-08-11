@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formúlario de Usuários</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Cadastro de Usuários</h1>
+    <form th:action="@{/usuarios/salvar}" method="post" th:object="${usuario}">
+        <input type="hidden" th:fild="*{idUsuario}" />
+        <br />
+
+        <label for="cpfUsuario">CPF:</label>
+        <input type="text" th:field="*{cpfUsuario}" />
+        <br />
+
+        <label for="loginUsuario">Login:</label>
+        <input type="text" th:field="*{loginUsuario}" />
+        <br />
+
+        <label for="senhaUsuario">Senha:</label>
+        <input type="password" th:field="*{senhaUsuario}" />
+        <br />
+
+        <input type="hidden" th:field="*{role}" value="ROLE_USER" />
+
+        <input type="submit" value="Salvar" />
+    </form>
+    
+</body>
+</html>

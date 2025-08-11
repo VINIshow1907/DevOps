@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de Bicicletas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/bicicleta.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <h1>Sistema de Bicicletas</h1>
+      </div>
+      <a th:href="@{/bicicletas/criar}" class="btn">
+        <i class="fas fa-plus icon-verde"></i> <span>Nova Bicicleta</span>
+      </a>
+    </div>
+
+    <div th:if="${param.error}" class="error-message" th:text="${param.error}"></div>
+    <div th:if="${param.success}" class="success-message" th:text="${param.success}"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Modelo</th>
+          <th>Marca</th>
+          <th>Categoria</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="bicicleta : ${bicicletas}">
+          <td th:text="${bicicleta.id}"></td>
+          <td th:text="${bicicleta.modelo}"></td>
+          <td th:text="${bicicleta.marca}"></td>
+          <td th:text="${bicicleta.categoria.nomecategoria}"></td>
+          <td>
+            <div class="action-buttons">
+              <a th:href="@{/bicicletas/editar/{id}(id=${bicicleta.id})}" 
+                 class="btn-secondary" title="Editar">
+                <i class="fas fa-edit icon-verde-escuro"></i>
+              </a>
+              <a th:href="@{/bicicletas/excluir/{id}(id=${bicicleta.id})}" 
+                 class="btn-danger" title="Excluir"
+                 onclick="return confirm('Tem certeza que deseja excluir esta bicicleta?')">
+                <i class="fas fa-trash icon-salmao"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

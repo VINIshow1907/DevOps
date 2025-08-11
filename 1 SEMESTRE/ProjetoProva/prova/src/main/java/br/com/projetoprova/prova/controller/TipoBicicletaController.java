@@ -10,7 +10,7 @@ import br.com.projetoprova.prova.entity.TipoBicicleta;
 import br.com.projetoprova.prova.service.TipoBicicletaService;
 
 @Controller
-@RequestMapping("/tipobicicleta")
+@RequestMapping("/tipoBicicletas")
 public class TipoBicicletaController {
     @Autowired
 
@@ -20,7 +20,7 @@ public class TipoBicicletaController {
     public String listar(Model model) {
         List<TipoBicicleta> tipoBicicletas = tipoBicicletaService.findAll();
         model.addAttribute("tipobicicletas", tipoBicicletas);
-        return "tipobicicleta/listaTipoBicicleta";
+        return "tipoBicicleta/listaTipoBicicleta";
     }
 
     @GetMapping("/criar")
