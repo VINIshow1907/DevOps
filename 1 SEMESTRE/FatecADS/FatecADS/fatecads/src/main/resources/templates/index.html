@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Escolar</title>
-    <style>
-        * {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        a {
-            text-decoration: none;
-        }
-    </style>
+    <title>Sistema FatecADS</title>
 </head>
-<body>
-    <h1 align="center">Sistema FatecADS</h1>
-    <h3 align="center"><a href="/alunos/listar">Gerenciar Alunos</a></h3>
-    <h3 align="center"><a href="/cursos/listar">Gerenciar Curso</a></h3>
+<body style="background-color: #e0ffe0;">
+    <h1 style="text-align: center;">FatecADS</h1>
+    <h2 style="text-align: center;">Sistema Acadêmico</h2>
+
+    <p style="text-align: center;">
+        <img src="../static/imagens/logo.png" height="250px" width="250px">
+    </p>
+    <div style="text-align: center;">
+        <form action="/login" method="get" style="display: inline;">
+            <button type="submit" style="background-color: green;
+                color:white; padding: 10px 20px; border: none;
+                border-radius: 5px;">Login</button>
+        </form>
+
+        <form action="/usuarios/criar" method="get" style="display: inline;">
+            <button type="submit" style="background-color: green;
+                color:white; padding: 10px 20px; border: none;
+                border-radius: 5px;">Cadastre-se</button>
+        </form>
+    </div>
+
+
+    
 </body>
 </html>

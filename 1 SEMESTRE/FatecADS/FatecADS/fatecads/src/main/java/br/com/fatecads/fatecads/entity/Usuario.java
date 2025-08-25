@@ -33,7 +33,7 @@ public class Usuario {
     @Column(nullable = false,length = 40)
     private String loginUsuario;
 
-    @Column(nullable = false,length = 40)
+    @Column(nullable = false,length = 500)
     private String senhaUsuario;
     
     private String role = "ROLE_USER";
