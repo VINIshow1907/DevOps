@@ -18,5 +18,7 @@
     <h1 align="center">Sistema FatecADS</h1>
     <h3 align="center"><a href="/alunos/listar">Gerenciar Alunos</a></h3>
     <h3 align="center"><a href="/cursos/listar">Gerenciar Curso</a></h3>
+    <a th:href="@{/logout}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
+    <form th:action="@{/logout}" id="logout-form" method="post">
 </body>
 </html>
