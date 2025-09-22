@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de alunos</title>
+</head>
+<body>
+    <div style="width: 50%; margin: auto; background-color: aqua;">
+        <table style="margin: 0 auto;">
+            <tr>
+                <td colspan="2" style="text-align: center;">Lista de nomes e telefones</td>
+            </tr>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+            </tr>
+            <tr th:each="aluno : ${alunos}">
+                <td th:text="${aluno.nomeAluno}"></td>
+                <td th:text="${aluno.telefoneAluno}"></td>
+            </tr>
+        </table>
+    </div>
+    <p style="text-align: center;"><a href="/fatecads">Voltar</a></p>
+</body>
+</html>

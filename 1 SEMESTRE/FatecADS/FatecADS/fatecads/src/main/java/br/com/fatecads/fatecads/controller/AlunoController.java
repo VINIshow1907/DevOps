@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.fatecads.fatecads.dto.AlunoTelefone;
 import br.com.fatecads.fatecads.entity.Aluno;
 import br.com.fatecads.fatecads.entity.Curso;
 import br.com.fatecads.fatecads.service.AlunoService;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-
 
 @Controller
 @RequestMapping("/alunos")
@@ -32,56 +31,51 @@ public class AlunoController {
     //Método para listar todos os alunos
     @GetMapping("/listar")
     public String listar(Model model) {
-        //Busca todos os alunos
         List<Aluno> alunos = alunoService.findAll();
-        //Adiciona os alunos 
         model.addAttribute("alunos", alunos);
-        //Retorna a página de lista de alunos
-        return "/aluno/listaAlunos";
+        // view: src/main/resources/templates/aluno/listaAlunos.html
+        return "aluno/listaAlunos";
     }
     
     //Método para abrir o formulário de criação de alunos
     @GetMapping("/criar")
-    public String criarFrom( Model model) {
-        //adiciona um novo aluno ao model
+    public String criarForm(Model model) {
         model.addAttribute("aluno", new Aluno());
-        //Busca todos os Cursos
         List<Curso> cursos = cursoService.findAll();
         model.addAttribute("cursos", cursos);
-        //retorna a página do formulário de alunos
-        return "/aluno/formularioAluno";
+        // view: src/main/resources/templates/aluno/formularioAluno.html
+        return "aluno/formularioAluno";
     }
 
-    @PostMapping("salvar")
+    @PostMapping("/salvar")
     public String salvar(@ModelAttribute Aluno aluno) {
-        //Salva o aluno
         alunoService.save(aluno);
-        //Redireciona para a lista de alunos
         return "redirect:/alunos/listar";
     }
     
-    //Método para exlcuir um aluno
+    //Método para excluir um aluno
     @GetMapping("/excluir/{id}")
-    public String excluir(@PathVariable Integer id) 
-    {
-        //Excluir o aluno
+    public String excluir(@PathVariable Integer id) {
         alunoService.deleteById(id);
         return "redirect:/alunos/listar";
     }
+
     //Método para abrir o formulário de edição de aluno
     @GetMapping("/editar/{id}")
-    public String editarForm(@PathVariable Integer id, Model model)
-    {
-        //Busca o aluno pelo id
+    public String editarForm(@PathVariable Integer id, Model model) {
         Aluno aluno = alunoService.findById(id);
-        //Adiciona o aluno ao modelo
         model.addAttribute("aluno", aluno);
-        //Busca todos os Cursos
         List<Curso> cursos = cursoService.findAll();
         model.addAttribute("cursos", cursos);
-        //Retorna a página do formulário de aluno
+        // view: src/main/resources/templates/aluno/formularioAluno.html
         return "aluno/formularioAluno";
     }
     
-    
+    @GetMapping("/listar-nome-telefone")
+    public String listarNomeTelefone(Model model) {
+        List<AlunoTelefone> alunos = alunoService.buscarNomesETelefone();
+        model.addAttribute("alunos", alunos);
+        // view: src/main/resources/templates/aluno/listaNomeTelefone.html
+        return "aluno/listaNomeTelefone";
+    }
 }
