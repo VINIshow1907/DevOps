@@ -16,7 +16,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
 
     @Query("SELECT p FROM Pedido p WHERE p.usuario = :usuario AND SIZE(P.itens) > 0")
 
-    Optional<Pedido> findByUsuarioAndItensIsNoEmpty(@Param("usuario") Usuario usuario);
+    Optional<Pedido> findByUsuarioAndItensIsNotEmpty(@Param("usuario") Usuario usuario);
 
     Optional<Pedido> findByUsuarioAndFinalizadoFalse(Usuario usuario);
 
